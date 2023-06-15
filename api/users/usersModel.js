@@ -17,5 +17,11 @@ const getAllUsers = ()=>{
     return users;
 }
 
+const insertUser = (user)=>{
+    const newUser = {userId: nanoid(50), ...user};
+    users.push(newUser);
+    return newUser;
+}
 
-module.exports = {getAllUsers};
+
+module.exports = {getAllUsers, insertUser};

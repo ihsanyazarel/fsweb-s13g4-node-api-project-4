@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const usersModel = require("./usersModel");
+const middleware = require("./usersMiddleware");
 
 
 router.get("/users", (req,res, next)=>{
@@ -10,9 +11,10 @@ router.get("/users", (req,res, next)=>{
         next(error);
     }
 });
-router.post("/register", (req,res, next)=>{
+router.post("/register",middleware.userNameValidation, middleware.passwordValidation, (req,res, next)=>{
     try {
-        
+        const newUser = usersModel.insertUser(req.body);
+        res.status(201).json(newUser);
     } catch (error) {
         next(error);
     }
