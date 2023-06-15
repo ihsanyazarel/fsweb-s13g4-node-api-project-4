@@ -1,3 +1,4 @@
+const userModel = require("./usersModel");
 const userNameValidation = (req, res, next) => {
   try {
     const { username } = req.body;
@@ -19,4 +20,12 @@ const passwordValidation = (req, res, next) => {
       }
 };
 
-module.exports = { userNameValidation, passwordValidation };
+const findUserValidation = (req, res, next)=>{
+    try {
+        userModel.findUser(req.body) ? next() : res.status(404).json({message: "Kullanıcı bulunamadı."});
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { userNameValidation, passwordValidation, findUserValidation };

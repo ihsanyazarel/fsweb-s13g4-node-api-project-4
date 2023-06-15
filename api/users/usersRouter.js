@@ -19,9 +19,9 @@ router.post("/register",middleware.userNameValidation, middleware.passwordValida
         next(error);
     }
 });
-router.post("/login", (req,res, next)=>{
+router.post("/login", middleware.userNameValidation, middleware.passwordValidation, middleware.findUserValidation, (req,res, next)=>{
     try {
-        
+        res.json({message: `Sayın ${req.body.username}, hoşgeldiniz...`});
     } catch (error) {
         next(error);
     }

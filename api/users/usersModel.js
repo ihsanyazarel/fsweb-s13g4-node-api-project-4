@@ -23,5 +23,9 @@ const insertUser = (user)=>{
     return newUser;
 }
 
+const findUser = (user)=>{
+    return users.find(item => item.username == user.username && item.password == user.password);
+}
 
-module.exports = {getAllUsers, insertUser};
+
+module.exports = {getAllUsers, insertUser,findUser};
